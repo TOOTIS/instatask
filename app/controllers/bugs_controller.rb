@@ -3,12 +3,19 @@ class BugsController < ApplicationController
 
   # POST /bugs
   def add
-  	if Bug.new(bug_params).valid?
-  	  @number = [4,6,67,7,4,2,1].sample
+    b = Bug.new(bug_params)
+  	if b.valid?
+      @number = Bug.increment_number(b.application_token)
+      BugsWorker.perform_async(bug_params.to_s, @number)
 		else
-	  	raise ActionController::ParameterMissing
+	  	raise ActionController::BadRequest
     end
   end
+
+  # # GET /bugs/count
+  # def count
+  #   @count = Bug.count(params[:application_token])
+  # end
 
   private
 
