@@ -17,8 +17,11 @@ gem 'redis-namespace'
 gem 'redis-rails'
 gem 'redis-rack-cache'
 
+gem 'sidekiq'
+
 group :development, :test do
   gem 'byebug'
+  gem 'robocop'
 end
 
 group :development do

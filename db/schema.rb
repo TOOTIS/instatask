@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160510172441) do
   end
 
   add_index "bugs", ["application_token"], name: "index_bugs_on_application_token", using: :btree
+  add_index "bugs", ["number"], name: "index_bugs_on_number", using: :btree
 
   create_table "states", force: :cascade do |t|
     t.integer  "bug_id",     limit: 4,   null: false
