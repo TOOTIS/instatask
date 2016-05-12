@@ -1,1 +1,1 @@
-$redis = Redis::Namespace.new("instatask", redis: Redis.new)
+$redis = Redis::Namespace.new('instatask', redis: Redis.new)

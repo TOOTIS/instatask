@@ -10,10 +10,10 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::RoutingError,     with: -> { render_404 }
 
   def render_400
-  	render(file: 'errors/400.json', status: 400, layout: false) and return
+    render(file: 'errors/400.json', status: 400, layout: false) && return
   end
 
   def render_404
-  	render(file: 'errors/404.json', status: 404, layout: false) and return
+    render(file: 'errors/404.json', status: 404, layout: false) && return
   end
 end

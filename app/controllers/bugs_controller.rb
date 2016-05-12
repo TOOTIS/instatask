@@ -4,25 +4,21 @@ class BugsController < ApplicationController
   # POST /bugs
   def add
     b = Bug.new(bug_params)
-  	if b.valid?
-      @number = Bug.increment_number(b.application_token)
-      BugsWorker.perform_async(bug_params.to_s, @number)
-		else
-	  	raise ActionController::BadRequest
-    end
+    raise ActionController::BadRequest unless b.valid?
+    @number = Bug.increment_number(b.application_token)
+    BugsWorker.perform_async(bug_params.to_s, @number)
   end
 
   # GET /bugs/count
   def count
     @count = Bug.count(params[:application_token])
-    if not @count
-      raise ActiveRecord::RecordNotFound
-    end
+    raise ActiveRecord::RecordNotFound unless @count
   end
 
   # GET /bugs/:application_token/:number
   def get
-    if not Bug.cached?(params[:application_token]) or Bug.count(params[:application_token]).to_i < params[:number].to_i
+    if !Bug.cached?(params[:application_token]) ||
+       Bug.count(params[:application_token]).to_i < params[:number].to_i
       raise ActiveRecord::RecordNotFound
     end
 
@@ -36,10 +32,10 @@ class BugsController < ApplicationController
 
   def bug_params
     params.require(:bug).permit(
-    	:application_token,
+      :application_token,
       :status,
       :priority,
-    	state_attributes: [:device, :os, :memory, :storage]
+      state_attributes: [:device, :os, :memory, :storage]
     )
   end
 end
