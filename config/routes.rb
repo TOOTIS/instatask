@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   post "/bugs", to: "bugs#add"
-  get "/bugs/count", to: "bugs#count"
-  get "/bugs", to: "bugs#get"
+  get "/bugs/count/:application_token", to: "bugs#count"
+  get "/bugs/:application_token/:number", to: "bugs#get"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

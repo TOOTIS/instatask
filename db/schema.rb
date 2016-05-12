@@ -35,4 +35,6 @@ ActiveRecord::Schema.define(version: 20160510172441) do
     t.datetime "updated_at",             null: false
   end
 
+  add_index "states", ["bug_id"], name: "index_states_on_bug_id", using: :btree
+
 end

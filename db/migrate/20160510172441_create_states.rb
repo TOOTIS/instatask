@@ -1,7 +1,7 @@
 class CreateStates < ActiveRecord::Migration
   def change
     create_table :states do |t|
-      t.belongs_to :bug, null: false
+      t.belongs_to :bug, null: false, index: true
       t.string :device, null: false
       t.string :os, null: false
       t.integer :memory
