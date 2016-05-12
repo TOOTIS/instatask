@@ -6,7 +6,7 @@ class BugsController < ApplicationController
     b = Bug.new(bug_params)
     raise ActionController::BadRequest unless b.valid?
     @number = Bug.increment_number(b.application_token)
-    BugsWorker.perform_async(bug_params.to_s, @number)
+    BugsWorker.perform_async(bug_params.to_hash, @number)
   end
 
   # GET /bugs/count
