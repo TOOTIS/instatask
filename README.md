@@ -17,7 +17,7 @@
 
 ---
 
-## Supported Requested (All in JSON)
+## Supported Requests (JSON)
 
 ### POST `/bugs`
 
